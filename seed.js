@@ -24,6 +24,7 @@ function seedData() {
         //User Attributes
         var firstName = faker.name.firstName();
         var lastName = faker.name.lastName();
+        var password = faker.user.password();
         var email = faker.internet.email();
         var image = faker.image.people();
 
@@ -31,6 +32,7 @@ function seedData() {
             "id": id,
             "firstName": firstName,
             "lastName": lastName,
+            "password": password,
             "image": image,
             "teamId": getRandomInt(0, 50)
         });
@@ -93,6 +95,5 @@ function seedData() {
 
     return { "users": users, "teams": teams, "feelings": feelings, "feelzies": feelzies }
 }
-
 
 module.exports = seedData;
