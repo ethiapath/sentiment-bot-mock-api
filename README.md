@@ -10,6 +10,12 @@ npm install -g json-server
 Then run:
 
 ```
+npm install
+```
+
+Then run:
+
+```
 npm start
 ```
 
