@@ -1,0 +1,14 @@
+{
+  "name": "sentiment-bot-mock-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "seed.js",
+  "scripts": {
+    "start": "json-server seed.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "faker": "^4.1.0"
+  }
+}
