@@ -15,8 +15,10 @@ function getRandomFiveDigitCode() {
 function seedData() {
     var users = []
     var teams = []
+    var surveys = []
+    var sentSurveys = []
+    var responses = []
     var feelings = []
-    var feelzies = []
 
     //Generate Users
     for(var id = 0; id < 200; id++) {
@@ -34,11 +36,11 @@ function seedData() {
             "lastName": lastName,
             "password": password,
             "image": image,
-            "teamId": getRandomInt(0, 50)
+            "teamId": getRandomInt(0, 500)
         });
     }
     //Generate Teams
-    for(var id = 0; id < 50; id++) { 
+    for(var id = 0; id < 500; id++) { 
 
         //Team Attributes
         var teamName = faker.lorem.word();
@@ -51,49 +53,64 @@ function seedData() {
         });
     }
 
-    //Generate Feelings
-    for(var id = 0; id < 500; id++) { 
+        //Generate Feelings
+        for(var id = 0; id < 100; id++) { 
 
-        //Feelings Attribute
-        var date = faker.date.recent();
-        var emoji = emojis[Math.floor(Math.random()*emojis.length)]
-        var feelingName = faker.lorem.word();
-        var longitude = faker.address.longitude()
-        var latitude = faker.address.latitude()
-        var image = faker.image.people()
-        feelings.push({
-            "id": id,
-            "feeling": emoji,
-            "feelingName": feelingName,
-            "date": date,
-            "longitude": "-73.935242",
-            "latitude": "40.730610",
-            "image": image,
-            "userId":  getRandomInt(0, 200)
-        });
-    }
+            //Feelings Attributes
+            var emoji = emojis[Math.floor(Math.random()*emojis.length)]
+            var mood = faker.lorem.word();
+            
+            feelings.push({
+                "id": id,
+                "mood": mood,
+                "emoji": emoji,
+                "surveyId": getRandomInt(0, 600),
+                "responseId": getRandomInt(0, 600)
+            });
+        }
 
-        var i = 0
-        //Generate Feelzies
-        //Every user has two feelzies for testing purposes
+        //Generate Surveys
         for(var id = 0; id < 600; id++) { 
 
+            var question = faker.lorem.words(5);
+            var date = faker.date.recent()
             //Feelzies Attribute
-            var emoji = emojis[Math.floor(Math.random()*emojis.length)]
-            var feelingName = faker.lorem.word();
-            feelzies.push({
+            surveys.push({
                 "id": id,
-                "feeling": emoji,
-                "feelingName": feelingName,
-                "userId":  i
+                "schedule": "",
+                "question": question,
+                "teamId":  getRandomInt(0, 500)
             });
-        if (i == 300) {
-            i = 0
-        }
-        i++
+
+            sentSurveys.push({
+                "id": id,
+                "date": date,
+                "userId": getRandomInt(0, 200),
+                "surveyId": getRandomInt(0, 600),
+                "teamId":  getRandomInt(0, 500)
+            });
         }
 
-    return { "users": users, "teams": teams, "feelings": feelings, "feelzies": feelzies }
+        //Generate Responses
+        for(var id = 0; id < 600; id++) { 
+
+            //Response Attribute
+            var date = faker.date.recent();
+            var longitude = faker.address.longitude()
+            var latitude = faker.address.latitude()
+            var image = faker.image.people()
+            responses.push({
+                "id": id,
+                "date": date,
+                "longitude": "-73.935242",
+                "latitude": "40.730610",
+                "image": image,
+                "userId":  getRandomInt(0, 200),
+                "surveyId": getRandomInt(0, 600)
+            });
+        }
+
+    return { "users": users, "teams": teams, "responses": responses, "surveys": surveys, "sentSurveys": sentSurveys, "feelings": feelings }
 }
 
 module.exports = seedData;
